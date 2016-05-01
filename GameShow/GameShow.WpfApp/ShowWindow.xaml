@@ -1,0 +1,27 @@
+﻿<Window x:Class="GameShow.WpfApp.ShowWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GameShow.WpfApp"
+        mc:Ignorable="d"
+        Title="ShowWindow" Height="768" Width="1024" WindowState="Maximized" WindowStyle="None">
+    <Window.Background>
+        <ImageBrush ImageSource="Images/GameShowBG.jpg"/>
+    </Window.Background>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="77*"/>
+            <RowDefinition Height="683*"/>
+        </Grid.RowDefinitions>
+        <Viewbox>
+            <Border Background="#B2FFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="10">
+                <TextBlock x:Name="txtGameTitle" HorizontalAlignment="Center" FontWeight="Bold" VerticalAlignment="Center" Text="Game Title" Padding="10,5,10,5" FontSize="14.667"></TextBlock>
+            </Border>
+        </Viewbox>
+        <Grid Grid.Row="1">
+            <Viewbox x:Name="vbContent1"/>
+            <Viewbox x:Name="vbContent2"></Viewbox>
+        </Grid>
+    </Grid>
+</Window>
