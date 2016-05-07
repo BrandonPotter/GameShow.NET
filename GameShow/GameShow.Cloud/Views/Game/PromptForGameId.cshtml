@@ -4,5 +4,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Enter Game ID</h2>
-
+<h2 class="text-center">Enter Game ID</h2>
+<div class="text-center">
+    <input id="gameId" type="number" class="form-control" placeholder="e.g. 111222" style="text-align: center; margin: 0 auto;"/>
+</div>
+<div class="text-center" style="margin-top: 15px;">
+    <button id="btnJoin" class="btn btn-lg btn-success">Join Game</button>
+</div>
+<script type="text/javascript">
+    $('#btnJoin').click(function() {
+        window.location = '/' + $('#gameId').val();
+    });
+</script>
