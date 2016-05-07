@@ -57,6 +57,10 @@
       <Project>{639078b8-5622-4431-aea1-d86c16e9f0ea}</Project>
       <Name>GameShow.GameModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GameShow.Logging\GameShow.Logging.csproj">
+      <Project>{3CC9F706-2D49-4E23-8715-BA558CA33DA4}</Project>
+      <Name>GameShow.Logging</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -10,6 +10,7 @@ namespace GameShow.Cloud.Controllers
 {
     public class GameApiController : ApiController
     {
+        [Route("controller/blink")]
         [HttpPost]
         public void BlinkController([FromBody] CloudGameStateController controller)
         {

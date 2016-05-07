@@ -21,7 +21,10 @@ namespace GameShow.Cloud
                 foreach (var gc in gameControllers)
                 {
                     Hubs.GameHub.ChangeControllerFrame(gc, "/12345/content/rf" + DateTime.Now.Second.ToString());
-                    Hubs.GameHub.BlinkController(gc);
+                    if (DateTime.Now.Second%10 == 0)
+                    {
+                        Hubs.GameHub.BlinkController(gc);
+                    }
                 }
 
                 System.Threading.Thread.Sleep(1000);
