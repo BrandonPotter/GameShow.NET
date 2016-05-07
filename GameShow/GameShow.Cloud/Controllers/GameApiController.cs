@@ -10,6 +10,13 @@ namespace GameShow.Cloud.Controllers
 {
     public class GameApiController : ApiController
     {
+        public void BlinkController([FromBody] CloudGameStateController controller)
+        {
+            var c = GameContext.Current.ControllerByToken(controller.ControllerToken);
+            if (c == null) { return; }
+            Hubs.GameHub.BlinkController(c);
+        }
+
         public CloudGameState PushGameState([FromBody] Game game)
         {
             if (string.IsNullOrEmpty(game.CloudId))
