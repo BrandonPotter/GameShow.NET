@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameShow.WpfApp"
-        xmlns:OperatorControls="clr-namespace:GameShow.WpfApp.OperatorControls" x:Class="GameShow.WpfApp.MainWindow"
+        xmlns:OperatorControls="clr-namespace:GameShow.WpfApp.OperatorControls" xmlns:Controls="clr-namespace:GameShow.WpfApp.Controls" x:Class="GameShow.WpfApp.MainWindow"
         mc:Ignorable="d"
         Title="GameShow.NET" Height="768" Width="1024" WindowState="Maximized" Background="#FFEAEAEA">
     <Grid>
@@ -20,7 +20,8 @@
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="103*"/>
-                    <RowDefinition Height="597*"/>
+                    <RowDefinition Height="349*"/>
+                    <RowDefinition Height="248*"/>
                 </Grid.RowDefinitions>
                 <Border Grid.Row="0" CornerRadius="3" Background="White">
                     <Grid>
@@ -36,6 +37,7 @@
                         </StackPanel>
                     </Grid>
                 </Border>
+                <Controls:CloudPanelControl Grid.Row="2"/>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>

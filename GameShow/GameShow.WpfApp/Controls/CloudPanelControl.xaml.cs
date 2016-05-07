@@ -29,9 +29,14 @@ namespace GameShow.WpfApp.Controls
         private void OnCloudSessionUpdated(CloudClient.CloudSession session)
         {
             if (session.CloudState == null) { return; }
-            this.txtGameID.Text = session.CloudState.GameID;
-            this.txtJoinUrl.Text = session.CloudState.JoinGameUrl ?? string.Empty;
-            controllerList.UpdateControllerList(session.CloudState.Controllers);
+
+            this.Dispatcher.Invoke(() =>
+            {
+                this.txtGameID.Text = session.CloudState.GameID;
+                this.txtJoinUrl.Text = session.CloudState.JoinGameUrl ?? string.Empty;
+                controllerList.UpdateControllerList(session.CloudState.Controllers);
+            });
+            
         }
     }
 }
