@@ -12,6 +12,7 @@ namespace GameShow.WpfApp
     {
         private ShowContext()
         {
+            Game = new Game();
         }
 
         private static ShowContext _current = null;

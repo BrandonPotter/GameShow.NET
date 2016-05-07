@@ -9,8 +9,12 @@ using GameShow.GameModel;
 
 namespace GameShow.CloudClient
 {
+    public delegate void CloudSessionUpdatedEvent(CloudSession session);
+
     public class CloudSession
     {
+        public event CloudSessionUpdatedEvent SessionUpdated;
+
         private Thread _autoPushThread = null;
 
         private string Endpoint(string relativePath)
@@ -22,8 +26,17 @@ namespace GameShow.CloudClient
             return "http://gshow.azurewebsites.net" + relativePath;
         }
 
+        public CloudGameState CloudState
+        {
+            get
+            {
+                return _lastCloudState;
+            }
+        }
+
         private DateTime _lastPush = DateTime.Now;
         private Game _lastGamePushed = null;
+        private CloudGameState _lastCloudState = null;
         public async Task PushGameStateAsync(Game game)
         {
             _lastGamePushed = game;
@@ -47,6 +60,14 @@ namespace GameShow.CloudClient
                 new StringContent(gameStateJson, Encoding.UTF8, "application/json"));
 
             var result = await postOp;
+            if (result.IsSuccessStatusCode)
+            {
+                var cState =
+                    Newtonsoft.Json.JsonConvert.DeserializeObject<CloudGameState>(
+                        result.Content.ReadAsStringAsync().Result);
+                _lastCloudState = cState;
+                SessionUpdated?.Invoke(this);
+            }
         }
 
         private void AutoPushThread()
@@ -74,7 +95,9 @@ namespace GameShow.CloudClient
                 return;
             }
 
+#pragma warning disable 4014
             PushGameStateAsync(_lastGamePushed);
+#pragma warning restore 4014
         }
     }
 }

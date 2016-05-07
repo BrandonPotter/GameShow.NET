@@ -87,6 +87,9 @@
     <Compile Include="Activities\GenericText\GenericTextUserControl.xaml.cs">
       <DependentUpon>GenericTextUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CloudPanelControl.xaml.cs">
+      <DependentUpon>CloudPanelControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ControllerList.xaml.cs">
       <DependentUpon>ControllerList.xaml</DependentUpon>
     </Compile>
@@ -101,6 +104,10 @@
       <DependentUpon>ShowWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Activities\GenericText\GenericTextUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CloudPanelControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

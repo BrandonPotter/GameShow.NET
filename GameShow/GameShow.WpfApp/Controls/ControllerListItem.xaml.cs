@@ -24,5 +24,22 @@ namespace GameShow.WpfApp.Controls
         {
             InitializeComponent();
         }
+
+        public string ControllerToken { get; set; }
+
+        public void UpdateControllerInfo(GameModel.CloudGameStateController controller)
+        {
+            if (controller.IsOnline)
+            {
+                orbStatus.Fill = Brushes.Lime;
+            }
+            else
+            {
+                orbStatus.Fill = Brushes.Red;
+            }
+
+            ControllerToken = controller.ControllerToken;
+            txtName.Text = controller.ControllerToken;
+        }
     }
 }

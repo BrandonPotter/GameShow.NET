@@ -37,6 +37,7 @@ namespace GameShow.WpfApp
         {
             // for testing
             activityOperatorControl.LoadActivity(new Activities.GenericText.GenericTextActivity());
+            ShowContext.Current.Cloud.PushGameStateAsync(ShowContext.Current.Game);
         }
 
         private List<string> _logMsgs = new List<string>();
