@@ -8,8 +8,14 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+
+    <style type="text/css">
+        .controllerBlink {
+            background-color: red;
+        }
+    </style>
 </head>
-<body style="padding-top: 0px; margin-top: 0px;">
+<body style="padding-top: 0px; margin-top: 0px;" id="pageBody">
 <div class="container body-content">
     <div id="gameContentFrame">
         @RenderBody()
@@ -40,6 +46,13 @@
     gHub.client.assignControllerToken = function(newToken) {
         console.log('New controller ID assigned: ' + newToken);
         controllerToken = newToken;
+    };
+
+    gHub.client.blink = function() {
+        $('#pageBody').addClass('controllerBlink');
+        setTimeout(function() {
+            $('#pageBody').removeClass('controllerBlink');
+        }, 500);
     };
 
     gHub.client.changeFrame = function(targetFrame) {

@@ -26,5 +26,10 @@ namespace GameShow.Cloud.Hubs
         {
             hubContext.Clients.Client(controller.ConnectionID).changeFrame(targetFrame);
         }
+
+        public static void BlinkController(CloudGameController controller)
+        {
+            hubContext.Clients.Client(controller.ConnectionID).blink();
+        }
     }
 }
