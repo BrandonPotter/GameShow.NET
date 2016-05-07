@@ -43,6 +43,7 @@
     <Compile Include="CloudGameState.cs" />
     <Compile Include="CloudGameStateController.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="NewGameId.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -21,7 +21,7 @@ namespace GameShow.Cloud.Controllers
 
         [Route("game/newid")]
         [HttpGet]
-        public string GetNewGameId()
+        public NewGameId GetNewGameId()
         {
             string userIp = System.Web.HttpContext.Current.Request.UserHostAddress;
             string gameId = new string(userIp.Where(c => char.IsDigit(c)).ToArray());
@@ -32,7 +32,7 @@ namespace GameShow.Cloud.Controllers
                 index += 1;
             }
 
-            return gameId + index.ToString();
+            return new NewGameId() {GameID = gameId + index.ToString()};
         }
 
         [Route("game/push")]
