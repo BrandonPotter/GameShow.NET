@@ -49,7 +49,7 @@ namespace GameShow.WpfApp
         {
             txtGameTitle.Text = ShowContext.Current.GameName;
         }
-
+        
         private bool _animationInProgress = false;
         private Viewbox _activeContentViewbox = null;
         private Viewbox _standbyContentViewbox = null;

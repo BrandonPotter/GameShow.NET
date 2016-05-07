@@ -148,6 +148,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GameShow.CloudClient\GameShow.CloudClient.csproj">
+      <Project>{d0ce63be-4a02-4ba7-82f8-afde07a1288c}</Project>
+      <Name>GameShow.CloudClient</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GameShow.Http\GameShow.Http.csproj">
       <Project>{be09bed6-c283-438c-8e06-25d7cc82d517}</Project>
       <Name>GameShow.Http</Name>
