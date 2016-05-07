@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameShow.Http", "GameShow.H
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameShow.Logging", "GameShow.Logging\GameShow.Logging.csproj", "{3CC9F706-2D49-4E23-8715-BA558CA33DA4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameShow.Cloud", "GameShow.Cloud\GameShow.Cloud.csproj", "{34E85E4E-3503-4DA9-A81F-F5F2AA782F4D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{3CC9F706-2D49-4E23-8715-BA558CA33DA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3CC9F706-2D49-4E23-8715-BA558CA33DA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3CC9F706-2D49-4E23-8715-BA558CA33DA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34E85E4E-3503-4DA9-A81F-F5F2AA782F4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34E85E4E-3503-4DA9-A81F-F5F2AA782F4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34E85E4E-3503-4DA9-A81F-F5F2AA782F4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34E85E4E-3503-4DA9-A81F-F5F2AA782F4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

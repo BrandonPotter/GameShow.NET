@@ -133,10 +133,10 @@ namespace GameShow.WpfApp
             _showWindow.ShowInTaskbar = false;
             var targetScreen = Screen.AllScreens[ShowContext.Current.ShowScreenIndex.Value];
             var screenBounds = targetScreen.Bounds;
-            _showWindow.Top = screenBounds.Top;
-            _showWindow.Left = screenBounds.Left;
-            _showWindow.Width = screenBounds.Width;
-            _showWindow.Height = screenBounds.Height;
+            _showWindow.Top = screenBounds.Top - 10;
+            _showWindow.Left = screenBounds.Left - 10;
+            _showWindow.Width = screenBounds.Width + 20;
+            _showWindow.Height = screenBounds.Height + 20;
             _showWindow.Topmost = true;
         }
 
