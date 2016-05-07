@@ -27,5 +27,11 @@ namespace GameShow.Cloud.Controllers
             ViewBag.FrameName = frame;
             return View("GenericFrame");
         }
+
+        [Route("{gameId}/disconnected")]
+        public ActionResult Disconnected(string gameId)
+        {
+            return View("GameEnded");
+        }
     }
 }

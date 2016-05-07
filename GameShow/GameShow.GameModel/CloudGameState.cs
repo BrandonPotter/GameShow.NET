@@ -10,5 +10,6 @@ namespace GameShow.GameModel
     {
         public string GameID { get; set; }
         public List<CloudGameStateController> Controllers { get; set; }
+        public string JoinGameUrl { get; set; }
     }
 }

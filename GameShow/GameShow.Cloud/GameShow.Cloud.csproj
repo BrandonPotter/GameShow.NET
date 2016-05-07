@@ -433,6 +433,7 @@
     <Content Include="Views\Game\PromptForGameId.cshtml" />
     <Content Include="Views\Game\GameFrame.cshtml" />
     <Content Include="Views\Game\GenericFrame.cshtml" />
+    <Content Include="Views\Game\GameEnded.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

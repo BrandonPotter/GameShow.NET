@@ -27,7 +27,8 @@
     <script src="~/signalr/hubs"></script>
     @RenderSection("scripts", required: false)
 <script type="text/javascript">
-    var controllerToken = '';
+    var controllerToken = $.cookie("controllerToken");
+
     var gameId = '@ViewBag.GameID';
     var gHub = $.connection.gameHub;
     $.connection.hub.start().done(function() {
@@ -46,6 +47,7 @@
     gHub.client.assignControllerToken = function(newToken) {
         console.log('New controller ID assigned: ' + newToken);
         controllerToken = newToken;
+        $.cookie("controllerToken", newToken, { expires: 365 });
     };
 
     gHub.client.blink = function() {

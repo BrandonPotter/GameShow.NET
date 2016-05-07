@@ -9,5 +9,6 @@ namespace GameShow.GameModel
     public class Game
     {
         public string CloudId { get; set; }
+        public string Name { get; set; }
     }
 }

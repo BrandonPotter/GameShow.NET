@@ -16,5 +16,7 @@ namespace GameShow.Cloud.Models
         {
             get { return DateTime.Now.Subtract(LastHeartbeat).TotalSeconds > 10; }
         }
+
+        public string CurrentFrame { get; set; }
     }
 }

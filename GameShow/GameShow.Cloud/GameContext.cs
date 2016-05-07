@@ -26,6 +26,12 @@ namespace GameShow.Cloud
 	    private ConcurrentDictionary<string, CloudGame> _games = new ConcurrentDictionary<string, CloudGame>();
         private ConcurrentDictionary<string, CloudGameController> _controllers = new ConcurrentDictionary<string, CloudGameController>();
 
+	    public bool IsGameIDInUse(string gameId)
+	    {
+	        if (string.IsNullOrEmpty(gameId)) { return true; }
+	        return _games.ContainsKey(gameId.ToUpperInvariant());
+	    }
+
         public CloudGame GameByID(string gameId)
 	    {
 	        if (string.IsNullOrEmpty(gameId))
