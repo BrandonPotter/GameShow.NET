@@ -21,9 +21,9 @@
                 <ColumnDefinition Width="77*"/>
                 <ColumnDefinition Width="223*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Game ID:" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
-            <TextBlock x:Name="txtGameID" Grid.Row="0"  Grid.Column="1" Text="Game ID" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
-            <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Text="Join URL:"></TextBlock>
+            <TextBlock Text="Game ID:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0"></TextBlock>
+            <TextBlock x:Name="txtGameID" Grid.Row="0"  Grid.Column="1" Text="Game ID" FontWeight="Bold" VerticalAlignment="Center" Margin="0"></TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Text="Join URL:" Margin="0,0,5,0"></TextBlock>
             <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Text="(none)" x:Name="txtJoinUrl"></TextBlock>
         </Grid>
         

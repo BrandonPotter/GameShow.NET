@@ -33,5 +33,11 @@ namespace GameShow.Cloud.Controllers
         {
             return View("GameEnded");
         }
+
+        [Route("{gameId}/idle")]
+        public ActionResult Idle(string gameId)
+        {
+            return View("GameIdle");
+        }
     }
 }

@@ -45,6 +45,9 @@ namespace GameShow.Cloud.Controllers
             }
 
             var cg = GameContext.Current.GameByID(game.CloudId);
+            cg.LastPush = DateTime.Now;
+            cg.Game = game;
+            GameContext.Current.SetControllerFrames(game);
 
             CloudGameState cgs = new CloudGameState();
             cgs.GameID = game.CloudId;

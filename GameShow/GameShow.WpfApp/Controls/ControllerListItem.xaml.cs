@@ -26,6 +26,7 @@ namespace GameShow.WpfApp.Controls
         }
 
         public string ControllerToken { get; set; }
+        public GameModel.CloudGameStateController ControllerObject { get; set; }
 
         public void UpdateControllerInfo(GameModel.CloudGameStateController controller)
         {
@@ -39,7 +40,13 @@ namespace GameShow.WpfApp.Controls
             }
 
             ControllerToken = controller.ControllerToken;
+            ControllerObject = controller;
             txtName.Text = controller.ControllerToken;
+        }
+
+        private void btnBlink_Click(object sender, RoutedEventArgs e)
+        {
+            ShowContext.Current.Cloud.BlinkController(ControllerObject);
         }
     }
 }

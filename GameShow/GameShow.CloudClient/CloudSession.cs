@@ -44,7 +44,8 @@ namespace GameShow.CloudClient
 
             if (string.IsNullOrEmpty(game.CloudId))
             {
-                game.CloudId = await new HttpClient().GetStringAsync(Endpoint("/game/newid"));
+                game.CloudId = Newtonsoft.Json.JsonConvert.DeserializeObject<NewGameId>(
+                    await new HttpClient().GetStringAsync(Endpoint("game/newid"))).GameID;
             }
 
             if (_autoPushThread == null)
@@ -55,19 +56,37 @@ namespace GameShow.CloudClient
             }
 
             var gameStateJson = Newtonsoft.Json.JsonConvert.SerializeObject(game);
+            var cState = await PostJsonGetResponse<CloudGameState>(this.Endpoint("/game/push"), gameStateJson);
+
+            if (cState != null)
+            {
+                _lastCloudState = cState;
+                SessionUpdated?.Invoke(this);
+            }
+        }
+
+        private async Task<T> PostJsonGetResponse<T>(string url, object payload)
+        {
+            return await PostJsonGetResponse<T>(url, Newtonsoft.Json.JsonConvert.SerializeObject(payload));
+        }
+
+        private async Task<T> PostJsonGetResponse<T>(string url, string jsonPayload)
+        {
             HttpClient hc = new HttpClient();
-            var postOp = hc.PostAsync(this.Endpoint("/game/push"),
-                new StringContent(gameStateJson, Encoding.UTF8, "application/json"));
+            var postOp = hc.PostAsync(url,
+                new StringContent(jsonPayload, Encoding.UTF8, "application/json"));
 
             var result = await postOp;
             if (result.IsSuccessStatusCode)
             {
-                var cState =
-                    Newtonsoft.Json.JsonConvert.DeserializeObject<CloudGameState>(
+                var deserializedObj =
+                    Newtonsoft.Json.JsonConvert.DeserializeObject<T>(
                         result.Content.ReadAsStringAsync().Result);
-                _lastCloudState = cState;
-                SessionUpdated?.Invoke(this);
+                return deserializedObj;
             }
+
+            Logging.LogMessage("CloudSession", "Error retrieving " + url);
+            return default(T);
         }
 
         private void AutoPushThread()
@@ -98,6 +117,11 @@ namespace GameShow.CloudClient
 #pragma warning disable 4014
             PushGameStateAsync(_lastGamePushed);
 #pragma warning restore 4014
+        }
+
+        public void BlinkController(CloudGameStateController controller)
+        {
+            PostJsonGetResponse<string>(Endpoint("/controller/blink"), controller);
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using GameShow.Cloud.Models;
+using GameShow.GameModel;
 
 namespace GameShow.Cloud
 {
@@ -71,6 +72,14 @@ namespace GameShow.Cloud
 	    public IEnumerable<CloudGameController> ControllersByGame(string gameId)
 	    {
 	        return _controllers.Values.Where(v => v.GameID == (gameId ?? string.Empty).ToUpperInvariant()).ToArray();
+	    }
+
+	    public void SetControllerFrames(Game game)
+	    {
+	        foreach (var c in ControllersByGame(game.CloudId))
+	        {
+	            Hubs.GameHub.ChangeControllerFrame(c, $"/{game.CloudId}/idle");
+	        }
 	    }
 	}
 }

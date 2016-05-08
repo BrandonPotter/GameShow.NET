@@ -14,6 +14,6 @@
         </Grid.ColumnDefinitions>
         <Ellipse Grid.Column="0" Fill="Red" Margin="5" x:Name="orbStatus"></Ellipse>
         <TextBlock Grid.Column="1" Text="Unnamed Controller" x:Name="txtName" VerticalAlignment="Center"></TextBlock>
-        <Button Grid.Column="2" x:Name="btnBlink">Blink</Button>
+        <Button Grid.Column="2" x:Name="btnBlink" Click="btnBlink_Click">Blink</Button>
     </Grid>
 </UserControl>

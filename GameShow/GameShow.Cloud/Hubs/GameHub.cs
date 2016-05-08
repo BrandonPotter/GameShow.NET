@@ -26,8 +26,9 @@ namespace GameShow.Cloud.Hubs
                 var g = GameContext.Current.GameByID(gameId);
                 if (!g.HostConnected)
                 {
-                    ChangeControllerFrame(GameContext.Current.ControllerByToken(controllerToken),
-                        $"/{gameId}/disconnected");
+                    string disconnectedFrame = $"/{gameId}/disconnected";
+                    var controller = GameContext.Current.ControllerByToken(controllerToken);
+                    ChangeControllerFrame(controller, disconnectedFrame);
                 }
             }
         }
