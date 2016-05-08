@@ -9,6 +9,7 @@ namespace GameShow.GameModel
     public class CloudGameStateController
     {
         public string ControllerToken { get; set; }
+        public string Nickname { get; set; }
         public bool IsOnline { get; set; }
     }
 }

@@ -33,7 +33,12 @@ namespace GameShow.Cloud.Models
 
             foreach (var c in GameContext.Current.ControllersByGame(this.GameID))
             {
-                cgs.Controllers.Add(new CloudGameStateController() { ControllerToken = c.ControllerToken, IsOnline = c.IsConnected });
+                cgs.Controllers.Add(new CloudGameStateController()
+                {
+                    ControllerToken = c.ControllerToken,
+                    IsOnline = c.IsConnected,
+                    Nickname = c.Nickname ?? "Unknown"
+                });
             }
 
             return cgs;

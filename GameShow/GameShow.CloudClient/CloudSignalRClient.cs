@@ -17,8 +17,8 @@ namespace GameShow.CloudClient
         {
             _parentSession = session;
             _hubConn = new HubConnection(signalRUrl);
-            _hubConn.Start();
             _proxy = _hubConn.CreateHubProxy("GameHub");
+            _hubConn.Start();
             InitProxy();
         }
 

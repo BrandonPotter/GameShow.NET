@@ -11,7 +11,7 @@ namespace GameShow.Cloud.Hubs
     {
         private static IHubContext hubContext = GlobalHost.ConnectionManager.GetHubContext<GameHub>();
 
-        public void ControllerHeartbeat(string gameId, string controllerToken)
+        public void ControllerHeartbeat(string gameId, string controllerToken, string nickname)
         {
             hubContext.Groups.Add(Context.ConnectionId, gameId);
             if (string.IsNullOrEmpty(controllerToken))
@@ -24,7 +24,7 @@ namespace GameShow.Cloud.Hubs
                     NotifyHostGameStateChanged(GameContext.Current.GameByID(gameId));
                 }
             }
-            GameContext.Current.SetControllerHeartbeat(controllerToken, gameId, Context.ConnectionId);
+            GameContext.Current.SetControllerHeartbeat(controllerToken, gameId, Context.ConnectionId, nickname);
 
             if (!string.IsNullOrEmpty(gameId))
             {

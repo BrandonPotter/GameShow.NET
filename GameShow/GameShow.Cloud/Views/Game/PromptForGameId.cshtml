@@ -8,11 +8,15 @@
 <div class="text-center">
     <input id="gameId" type="text" pattern="\d*" class="form-control" placeholder="e.g. 111222" style="text-align: center; margin: 0 auto;"/>
 </div>
+<h2 class="text-center">Device Nickname</h2>
+<div class="text-center">
+    <input id="nickname" type="text" class="form-control" placeholder="e.g. Eagle Team" style="text-align: center; margin: 0 auto;" />
+</div>
 <div class="text-center" style="margin-top: 15px;">
     <button id="btnJoin" class="btn btn-lg btn-success">Join Game</button>
 </div>
 <script type="text/javascript">
     $('#btnJoin').click(function() {
-        window.location = '/' + $('#gameId').val();
+        window.location = '/' + $('#gameId').val() + '?nick=' + $('#nickname').val();
     });
 </script>

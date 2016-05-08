@@ -61,12 +61,17 @@ namespace GameShow.Cloud
             return _controllers[controllerToken.ToUpperInvariant()];
         }
 
-        public void SetControllerHeartbeat(string controllerToken, string gameId, string connectionId)
+        public void SetControllerHeartbeat(string controllerToken, string gameId, string connectionId, string nickname)
         {
             var c = ControllerByToken(controllerToken);
             c.GameID = (gameId ?? string.Empty).ToUpperInvariant();
             c.LastHeartbeat = DateTime.Now;
             c.ConnectionID = connectionId;
+
+            if (!string.IsNullOrEmpty(nickname))
+            {
+                c.Nickname = nickname;
+            }
         }
 
 	    public IEnumerable<CloudGameController> ControllersByGame(string gameId)

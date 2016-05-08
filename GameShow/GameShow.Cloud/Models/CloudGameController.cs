@@ -11,6 +11,7 @@ namespace GameShow.Cloud.Models
         public string GameID { get; set; }
         public string ControllerToken { get; set; }
         public DateTime LastHeartbeat { get; set; }
+        public string Nickname { get; set; }
 
         public bool IsConnected
         {

@@ -32,12 +32,13 @@
 
     var gameId = '@ViewBag.GameID';
     var gHub = $.connection.gameHub;
+    var nickname = '@Request.Params["nick"]';
     $.connection.hub.start().done(function() {
         console.log('SignalR connected');
 
         var interval = 5000;
         var heartbeat = function () {
-            gHub.server.controllerHeartbeat(gameId, controllerToken);
+            gHub.server.controllerHeartbeat(gameId, controllerToken, nickname);
             setTimeout(function () {
                 heartbeat();
             }, interval);
