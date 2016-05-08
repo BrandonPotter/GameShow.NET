@@ -16,6 +16,10 @@
     <button id="btnJoin" class="btn btn-lg btn-success">Join Game</button>
 </div>
 <script type="text/javascript">
+    $.ready(function() {
+        $('#nickname').val($.cookie('devicenickname'));
+    });
+
     $('#btnJoin').click(function() {
         window.location = '/' + $('#gameId').val() + '?nick=' + $('#nickname').val();
     });

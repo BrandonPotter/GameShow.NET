@@ -41,7 +41,7 @@ namespace GameShow.WpfApp.Controls
 
             ControllerToken = controller.ControllerToken;
             ControllerObject = controller;
-            txtName.Text = controller.ControllerToken;
+            txtName.Text = controller.Nickname;
         }
 
         private void btnBlink_Click(object sender, RoutedEventArgs e)
