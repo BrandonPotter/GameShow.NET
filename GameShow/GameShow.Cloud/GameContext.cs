@@ -64,6 +64,7 @@ namespace GameShow.Cloud
         public void SetControllerHeartbeat(string controllerToken, string gameId, string connectionId, string nickname)
         {
             var c = ControllerByToken(controllerToken);
+            string oldGameId = c.GameID;
             c.GameID = (gameId ?? string.Empty).ToUpperInvariant();
             c.LastHeartbeat = DateTime.Now;
             c.ConnectionID = connectionId;
@@ -71,6 +72,19 @@ namespace GameShow.Cloud
             if (!string.IsNullOrEmpty(nickname))
             {
                 c.Nickname = nickname;
+            }
+
+            if (oldGameId != c.GameID)
+            {
+                if (!string.IsNullOrEmpty(oldGameId))
+                {
+                    Hubs.GameHub.NotifyHostGameStateChanged(GameByID(oldGameId));
+                }
+
+                if (!string.IsNullOrEmpty(c.GameID))
+                {
+                    Hubs.GameHub.NotifyHostGameStateChanged(GameByID(c.GameID));
+                }
             }
         }
 
