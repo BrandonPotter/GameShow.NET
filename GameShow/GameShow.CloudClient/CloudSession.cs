@@ -37,6 +37,7 @@ namespace GameShow.CloudClient
         private DateTime _lastPush = DateTime.Now;
         private Game _lastGamePushed = null;
         private CloudGameState _lastCloudState = null;
+        private CloudSignalRClient _srClient = null;
         public async Task PushGameStateAsync(Game game)
         {
             _lastGamePushed = game;
@@ -55,14 +56,28 @@ namespace GameShow.CloudClient
                 _autoPushThread.Start();
             }
 
+            if (_srClient == null)
+            {
+                _srClient = new CloudSignalRClient(this, Endpoint("/signalr"));
+            }
+
             var gameStateJson = Newtonsoft.Json.JsonConvert.SerializeObject(game);
             var cState = await PostJsonGetResponse<CloudGameState>(this.Endpoint("/game/push"), gameStateJson);
+
+            _srClient.SendHostHeartbeat();
 
             if (cState != null)
             {
                 _lastCloudState = cState;
                 SessionUpdated?.Invoke(this);
             }
+        }
+
+        internal void NotifyGameStateChangeFromSignalR(CloudGameState gameState)
+        {
+            _lastCloudState = gameState;
+            SessionUpdated?.Invoke(this);
+            Logging.LogMessage("CloudSession", "Game state changed");
         }
 
         private async Task<T> PostJsonGetResponse<T>(string url, object payload)

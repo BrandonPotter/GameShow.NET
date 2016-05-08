@@ -11,6 +11,8 @@ namespace GameShow.Cloud.Models
         public string GameID { get; set; }
         public DateTime? LastPush { get; set; }
         public Game Game { get; set; }
+        public DateTime? LastHostSignalRHeartbeat { get; set; }
+        public string HostConnectionID { get; set; }
 
         public bool HostConnected
         {
@@ -20,6 +22,21 @@ namespace GameShow.Cloud.Models
                 if (DateTime.Now.Subtract(LastPush.Value).TotalSeconds < 60) { return true; }
                 return false;
             }
+        }
+
+        public CloudGameState ToCloudGameState()
+        {
+            CloudGameState cgs = new CloudGameState();
+            cgs.GameID = this.GameID;
+            cgs.Controllers = new List<CloudGameStateController>();
+            cgs.JoinGameUrl = "http://gshow.azurewebsites.net/" + this.GameID;
+
+            foreach (var c in GameContext.Current.ControllersByGame(this.GameID))
+            {
+                cgs.Controllers.Add(new CloudGameStateController() { ControllerToken = c.ControllerToken, IsOnline = c.IsConnected });
+            }
+
+            return cgs;
         }
     }
 }

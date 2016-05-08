@@ -49,17 +49,7 @@ namespace GameShow.Cloud.Controllers
             cg.Game = game;
             GameContext.Current.SetControllerFrames(game);
 
-            CloudGameState cgs = new CloudGameState();
-            cgs.GameID = game.CloudId;
-            cgs.Controllers = new List<CloudGameStateController>();
-            cgs.JoinGameUrl = "http://gshow.azurewebsites.net/" + game.CloudId;
-
-            foreach (var c in GameContext.Current.ControllersByGame(game.CloudId))
-            {
-                cgs.Controllers.Add(new CloudGameStateController() {ControllerToken = c.ControllerToken, IsOnline = c.IsConnected});
-            }
-
-            return cgs;
+            return cg.ToCloudGameState();
         }
     }
 }

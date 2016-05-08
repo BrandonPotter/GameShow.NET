@@ -81,5 +81,13 @@ namespace GameShow.Cloud
 	            Hubs.GameHub.ChangeControllerFrame(c, $"/{game.CloudId}/idle");
 	        }
 	    }
+
+	    public void SetGameHostHeartbeat(string gameId, string connectionId)
+	    {
+	        if (string.IsNullOrEmpty(gameId)) { return; }
+	        var g = GameByID(gameId);
+            g.LastHostSignalRHeartbeat = DateTime.Now;
+            g.HostConnectionID = connectionId;
+	    }
 	}
 }

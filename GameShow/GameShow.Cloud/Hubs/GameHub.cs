@@ -18,6 +18,11 @@ namespace GameShow.Cloud.Hubs
             {
                 controllerToken = Guid.NewGuid().ToString();
                 hubContext.Clients.Client(Context.ConnectionId).assignControllerToken(controllerToken);
+
+                if (!string.IsNullOrEmpty(gameId))
+                {
+                    NotifyHostGameStateChanged(GameContext.Current.GameByID(gameId));
+                }
             }
             GameContext.Current.SetControllerHeartbeat(controllerToken, gameId, Context.ConnectionId);
 
@@ -33,6 +38,11 @@ namespace GameShow.Cloud.Hubs
             }
         }
 
+        public void HostHeartbeat(string gameId)
+        {
+            GameContext.Current.SetGameHostHeartbeat(gameId, Context.ConnectionId);
+        }
+
         public static void ChangeControllerFrame(CloudGameController controller, string targetFrame)
         {
             hubContext.Clients.Client(controller.ConnectionID).changeFrame(targetFrame);
@@ -42,6 +52,13 @@ namespace GameShow.Cloud.Hubs
         public static void BlinkController(CloudGameController controller)
         {
             hubContext.Clients.Client(controller.ConnectionID).blink();
+        }
+
+        public static void NotifyHostGameStateChanged(CloudGame game)
+        {
+            if (string.IsNullOrEmpty(game.HostConnectionID)) { return; }
+            hubContext.Clients.Client(game.HostConnectionID).GameStateChanged(
+                Newtonsoft.Json.JsonConvert.SerializeObject(game.ToCloudGameState()));
         }
     }
 }
