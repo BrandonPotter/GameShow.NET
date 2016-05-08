@@ -10,5 +10,6 @@ namespace GameShow.GameModel
     {
         public string CloudId { get; set; }
         public string Name { get; set; }
+        public List<ControllerPrompt> ControllerPrompts { get; set; }
     }
 }

@@ -42,8 +42,10 @@
   <ItemGroup>
     <Compile Include="CloudGameState.cs" />
     <Compile Include="CloudGameStateController.cs" />
+    <Compile Include="ControllerPrompt.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="NewGameId.cs" />
+    <Compile Include="PromptButton.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

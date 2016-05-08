@@ -12,5 +12,10 @@ namespace GameShow.WpfApp.Activities
         public abstract UserControl GetShowDisplayControl();
         public abstract string GetActivityType();
         public abstract string GetTitle();
+
+        public virtual void NotifyActive()
+        {
+            
+        }
     }
 }

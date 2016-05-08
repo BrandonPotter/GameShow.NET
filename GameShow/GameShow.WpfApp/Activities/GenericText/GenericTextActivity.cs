@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
+using GameShow.GameModel;
 
 namespace GameShow.WpfApp.Activities.GenericText
 {
@@ -41,6 +43,23 @@ namespace GameShow.WpfApp.Activities.GenericText
         public override string GetTitle()
         {
             return $"Display Text {TextToDisplay ?? string.Empty}";
+        }
+
+        public override void NotifyActive()
+        {
+            List<ControllerPrompt> cPrompts = new List<ControllerPrompt>();
+
+            foreach (var c in ShowContext.Current.Cloud.CloudState.Controllers)
+            {
+                cPrompts.Add(new ControllerPrompt()
+                {
+                    Text = TextToDisplay ?? string.Empty,
+                    ControllerToken = c.ControllerToken
+                });
+            }
+
+            ShowContext.Current.Game.ControllerPrompts = cPrompts;
+            ShowContext.Current.Cloud.PushGameStateAsync(ShowContext.Current.Game);
         }
     }
 }

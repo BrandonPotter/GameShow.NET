@@ -41,6 +41,14 @@ namespace GameShow.WpfApp.OperatorControls
                 return;
             }
 
+            try
+            {
+                _currentActivity.NotifyActive();
+            }
+            catch (Exception ex)
+            {
+                Logging.LogMessage("Activity Operator", "Error notifying activity active: " + ex.Message);
+            }
             ShowContext.Current.ShowWindow.SlideToContent(_currentActivity.GetShowDisplayControl(),
                 TimeSpan.FromSeconds(1));
         }

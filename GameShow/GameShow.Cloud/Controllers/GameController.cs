@@ -39,5 +39,15 @@ namespace GameShow.Cloud.Controllers
         {
             return View("GameIdle");
         }
+
+        [Route("{gameId}/p/{controllerToken}")]
+        public ActionResult ControllerPrompt(string gameId, string controllerToken)
+        {
+            var g = GameContext.Current.GameByID(gameId);
+            var targetPrompt = g.Game.ControllerPrompts.FirstOrDefault(
+                cp => cp.ControllerToken.ToUpperInvariant() == controllerToken.ToUpperInvariant());
+
+            return View("ControllerPrompt", targetPrompt);
+        }
     }
 }
