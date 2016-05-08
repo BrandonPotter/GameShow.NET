@@ -97,18 +97,22 @@ namespace GameShow.Cloud
 	    {
 	        foreach (var c in ControllersByGame(game.CloudId))
 	        {
-	            var cPrompt =
-	                game.ControllerPrompts.FirstOrDefault(
-	                    cp =>
-	                        (cp.ControllerToken ?? string.Empty).ToUpperInvariant() == c.ControllerToken.ToUpperInvariant());
+	            if (game.ControllerPrompts != null)
+	            {
+	                var cPrompt =
+	                    game.ControllerPrompts.FirstOrDefault(
+	                        cp =>
+	                            (cp.ControllerToken ?? string.Empty).ToUpperInvariant() ==
+	                            c.ControllerToken.ToUpperInvariant());
 
-	            if (cPrompt != null)
-	            {
-                    Hubs.GameHub.ChangeControllerFrame(c, $"/{game.CloudId}/p/{c.ControllerToken}");
-                }
-	            else
-	            {
-	                Hubs.GameHub.ChangeControllerFrame(c, $"/{game.CloudId}/idle");
+	                if (cPrompt != null)
+	                {
+	                    Hubs.GameHub.ChangeControllerFrame(c, $"/{game.CloudId}/p/{c.ControllerToken}");
+	                }
+	                else
+	                {
+	                    Hubs.GameHub.ChangeControllerFrame(c, $"/{game.CloudId}/idle");
+	                }
 	            }
 	        }
 	    }
