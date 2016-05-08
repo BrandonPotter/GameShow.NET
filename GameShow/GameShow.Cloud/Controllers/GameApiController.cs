@@ -56,7 +56,7 @@ namespace GameShow.Cloud.Controllers
 
             foreach (var c in GameContext.Current.ControllersByGame(game.CloudId))
             {
-                cgs.Controllers.Add(new CloudGameStateController() {ControllerToken = c.ControllerToken});
+                cgs.Controllers.Add(new CloudGameStateController() {ControllerToken = c.ControllerToken, IsOnline = c.IsConnected});
             }
 
             return cgs;
