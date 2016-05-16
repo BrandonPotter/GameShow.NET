@@ -41,6 +41,8 @@ namespace GameShow.Cloud.Hubs
         public void HostHeartbeat(string gameId)
         {
             GameContext.Current.SetGameHostHeartbeat(gameId, Context.ConnectionId);
+            NotifyHostDebugMessage(GameContext.Current.GameByID(gameId),
+                "RX host heartbeat from connection " + Context.ConnectionId);
         }
 
         public static void ChangeControllerFrame(CloudGameController controller, string targetFrame)
@@ -59,6 +61,16 @@ namespace GameShow.Cloud.Hubs
             if (string.IsNullOrEmpty(game.HostConnectionID)) { return; }
             hubContext.Clients.Client(game.HostConnectionID).GameStateChanged(
                 Newtonsoft.Json.JsonConvert.SerializeObject(game.ToCloudGameState()));
+        }
+
+        public static void NotifyHostDebugMessage(CloudGame game, string message)
+        {
+            if (string.IsNullOrEmpty(game.HostConnectionID))
+            {
+                hubContext.Clients.All.ServerDebugMessage("Could not find host for game " + (game.GameID ?? "unknown game ID"));
+            }
+
+            hubContext.Clients.Client(game.HostConnectionID).ServerDebugMessage(message);
         }
     }
 }

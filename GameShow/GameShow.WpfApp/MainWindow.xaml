@@ -12,6 +12,14 @@
             <RowDefinition Height="37"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        <Menu>
+            <MenuItem Header="File">
+                <MenuItem Header="Exit"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Tools">
+                <MenuItem Header="Import Multiple Choice Questions..." x:Name="menuImportMultipleChoice" Click="OnImportMultipleChoice"></MenuItem>
+            </MenuItem>
+        </Menu>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="250"/>
@@ -38,6 +46,7 @@
                     </Grid>
                 </Border>
                 <Controls:CloudPanelControl Grid.Row="2"/>
+                <Controls:ActivityListControl Grid.Row="1"/>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>

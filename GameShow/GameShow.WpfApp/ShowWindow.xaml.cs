@@ -30,17 +30,23 @@ namespace GameShow.WpfApp
         private void UpdateScreen()
         {
             while (true)
-            { 
-                this.Dispatcher.Invoke(() =>
+            {
+                try
                 {
-                    try
+                    this.Dispatcher.Invoke(() =>
                     {
-                        UpdateScreenControlsMainThread();
-                    }
-                    catch
-                    {
-                    }
-                });
+                        try
+                        {
+                            UpdateScreenControlsMainThread();
+                        }
+                        catch
+                        {
+                        }
+                    });
+                }
+                catch
+                {
+                }
                 System.Threading.Thread.Sleep(250);
             }
         }

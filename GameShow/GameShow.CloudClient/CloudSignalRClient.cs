@@ -18,7 +18,8 @@ namespace GameShow.CloudClient
             _parentSession = session;
             _hubConn = new HubConnection(signalRUrl);
             _proxy = _hubConn.CreateHubProxy("GameHub");
-            _hubConn.Start();
+            _hubConn.Start().Wait();
+            Logging.LogMessage("Cloud", "Connected");
             InitProxy();
         }
 
@@ -26,8 +27,14 @@ namespace GameShow.CloudClient
         {
             _proxy.On<string>("NotifyGameStateChanged", (json) =>
             {
+                Logging.LogMessage("Cloud", "NotifyGameStateChanged");
                 _parentSession.NotifyGameStateChangeFromSignalR(
                     Newtonsoft.Json.JsonConvert.DeserializeObject<CloudGameState>(json));
+            });
+
+            _proxy.On<string>("ServerDebugMessage", (message) =>
+            {
+                Logging.LogMessage("Cloud Debug", message ?? string.Empty);
             });
         }
 

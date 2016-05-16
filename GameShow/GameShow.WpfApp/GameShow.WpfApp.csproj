@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -87,6 +91,11 @@
     <Compile Include="Activities\GenericText\GenericTextUserControl.xaml.cs">
       <DependentUpon>GenericTextUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Activities\MultipleChoice\MultipleChoiceAnswer.cs" />
+    <Compile Include="Activities\MultipleChoice\MultipleChoiceQuestionActivity.cs" />
+    <Compile Include="Controls\ActivityListControl.xaml.cs">
+      <DependentUpon>ActivityListControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CloudPanelControl.xaml.cs">
       <DependentUpon>CloudPanelControl.xaml</DependentUpon>
     </Compile>
@@ -96,6 +105,11 @@
     <Compile Include="Controls\ControllerListItem.xaml.cs">
       <DependentUpon>ControllerListItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\NewActivityTypeDialog.xaml.cs">
+      <DependentUpon>NewActivityTypeDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Importers\MultipleChoiceDataImporter.cs" />
+    <Compile Include="Observable.cs" />
     <Compile Include="OperatorControls\ActivityOperatorControl.xaml.cs">
       <DependentUpon>ActivityOperatorControl.xaml</DependentUpon>
     </Compile>
@@ -104,6 +118,10 @@
       <DependentUpon>ShowWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Activities\GenericText\GenericTextUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ActivityListControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -116,6 +134,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ControllerListItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\NewActivityTypeDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -164,6 +186,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="SampleData\SampleMultipleChoice.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

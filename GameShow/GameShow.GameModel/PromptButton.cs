@@ -9,6 +9,8 @@ namespace GameShow.GameModel
     public class PromptButton
     {
         public string Text { get; set; }
-        public string EventID { get; set; }
+        public string EventType { get; set; }
+        public string EventValue { get; set; }
+        public string Color { get; set; }
     }
 }

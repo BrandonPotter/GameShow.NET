@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -33,10 +35,25 @@ namespace GameShow.WpfApp
             this.Loaded += OnLoaded;
         }
 
+        public bool? ShowDialog(Window dialog)
+        {
+            dialog.Owner = this;
+            dialog.ShowInTaskbar = false;
+            dialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            dialog.ResizeMode = ResizeMode.NoResize;
+            dialog.WindowStyle = WindowStyle.SingleBorderWindow;
+            return dialog.ShowDialog();
+        }
+
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            // for testing
-            activityOperatorControl.LoadActivity(new Activities.GenericText.GenericTextActivity());
+            ShowContext.Current.CurrentSelectedActivity.ValueChanged += OnCurrentActivityChanged;
+            ShowContext.Current.Cloud.PushGameStateAsync(ShowContext.Current.Game);
+        }
+
+        private void OnCurrentActivityChanged(object sender, EventArgs e)
+        {
+            activityOperatorControl.LoadActivity(ShowContext.Current.CurrentSelectedActivity.Value);
             ShowContext.Current.Cloud.PushGameStateAsync(ShowContext.Current.Game);
         }
 
@@ -110,8 +127,17 @@ namespace GameShow.WpfApp
                     {
                         try
                         {
-                            this.Dispatcher.Invoke(RefreshShowWindow);
-                        } catch { }
+                            try
+                            {
+                                this.Dispatcher.Invoke(RefreshShowWindow);
+                            }
+                            catch
+                            {
+                            }
+                        }
+                        catch
+                        {
+                        }
                         System.Threading.Thread.Sleep(1000);
                     }
                 });
@@ -144,6 +170,26 @@ namespace GameShow.WpfApp
         private void OnGameNameTextChanged(object sender, TextChangedEventArgs e)
         {
             ShowContext.Current.GameName = txtGameName.Text;
+        }
+
+        private void OnImportMultipleChoice(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Multiple Choice JSON File (*.json)|*.json";
+            ofd.InitialDirectory = new FileInfo(Assembly.GetExecutingAssembly().Location).Directory.FullName;
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Importers.MultipleChoiceDataImporter mcdi = new Importers.MultipleChoiceDataImporter();
+                try
+                {
+                    mcdi.ImportMultipleChoiceJson(System.IO.File.ReadAllText(ofd.FileName));
+                    System.Windows.MessageBox.Show("Imported successfully.");
+                }
+                catch (Exception ex)
+                {
+                    System.Windows.MessageBox.Show("Error importing: " + ex.Message);
+                }
+            }
         }
     }
 }
