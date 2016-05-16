@@ -99,7 +99,7 @@ namespace GameShow.WpfApp.Activities.MultipleChoice
 
         private void SetAnswerText(int answerIndex, string value)
         {
-            while (answerIndex < _answers.Count)
+            while (answerIndex >= _answers.Count)
             {
                 _answers.Add(new MultipleChoiceAnswer());
             }

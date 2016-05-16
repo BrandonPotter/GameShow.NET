@@ -96,14 +96,16 @@ namespace GameShow.WpfApp
             if ((eventType ?? string.Empty).ToUpperInvariant() == "ANSWER")
             {
                 _dictControllerAnswers[controllerToken] = eventValue;
-                var targetPrompt = Game.ControllerPrompts.FirstOrDefault(cp => cp.ControllerToken == controllerToken);
+                var targetPrompt = Game.ControllerPrompts.FirstOrDefault(cp => cp.ControllerToken.ToUpperInvariant() == controllerToken.ToUpperInvariant());
                 if (targetPrompt != null)
                 {
                     if (targetPrompt.PromptButtons != null)
                     {
+                        targetPrompt.PromptButtons.ForEach(pb => pb.Color = "darkgray");
+
                         var targetButton =
                             targetPrompt.PromptButtons.FirstOrDefault(
-                                b => b.EventType == eventType && b.EventValue == eventValue);
+                                b => (b.EventType??string.Empty).ToUpperInvariant() == (eventType??string.Empty).ToUpperInvariant() && (b.EventValue ?? string.Empty) == (eventValue ?? string.Empty));
                         if (targetButton != null)
                         {
                             targetButton.Color = "green";
