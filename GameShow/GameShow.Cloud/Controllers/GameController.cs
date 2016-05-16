@@ -18,6 +18,16 @@ namespace GameShow.Cloud.Controllers
         public ActionResult EnterGame(string gameId)
         {
             ViewBag.GameID = gameId;
+            var game = GameContext.Current.GameByID(gameId);
+            if (game == null)
+            {
+                ViewBag.Text = "Game not found";
+            }
+            else
+            {
+                ViewBag.Text = "Welcome to " + game.Game.Name;
+            }
+            
             return View("GameFrame");
         }
 
