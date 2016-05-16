@@ -11,7 +11,7 @@
         foreach (var p in Model.PromptButtons)
          {
              <div>
-                 <a href="javascript:promptRespond('@p.EventType', '@p.EventValue');" class="btn" style="background-color: @p.Color;">@p.Text</a>
+                 <a href="javascript:promptRespond('@p.EventType', '@p.EventValue');" class="btn btn-success" style="width: 100%; background-color: @p.Color;">@p.Text</a>
              </div>
          }
     }
