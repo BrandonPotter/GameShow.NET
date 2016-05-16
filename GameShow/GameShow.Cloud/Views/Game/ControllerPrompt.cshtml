@@ -6,11 +6,14 @@
 
 <div class="text-center">
     <h2>@Model.Text</h2>
-    @foreach (var p in Model.PromptButtons)
+    @if (Model.PromptButtons != null)
     {
-        <div>
-            <a href="javascript:promptRespond('@p.EventType', '@p.EventValue');" class="btn" style="background-color: @p.Color;">@p.Text</a>
-        </div>
+        foreach (var p in Model.PromptButtons)
+         {
+             <div>
+                 <a href="javascript:promptRespond('@p.EventType', '@p.EventValue');" class="btn" style="background-color: @p.Color;">@p.Text</a>
+             </div>
+         }
     }
 </div>
 
