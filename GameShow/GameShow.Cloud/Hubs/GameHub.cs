@@ -18,11 +18,6 @@ namespace GameShow.Cloud.Hubs
             {
                 controllerToken = Guid.NewGuid().ToString();
                 hubContext.Clients.Client(Context.ConnectionId).assignControllerToken(controllerToken);
-
-                if (!string.IsNullOrEmpty(gameId))
-                {
-                    NotifyHostGameStateChanged(GameContext.Current.GameByID(gameId));
-                }
             }
             GameContext.Current.SetControllerHeartbeat(controllerToken, gameId, Context.ConnectionId, nickname);
 
@@ -58,9 +53,20 @@ namespace GameShow.Cloud.Hubs
 
         public static void NotifyHostGameStateChanged(CloudGame game)
         {
-            if (string.IsNullOrEmpty(game.HostConnectionID)) { return; }
+            if (string.IsNullOrEmpty(game.HostConnectionID))
+            {
+                NotifyAllHostsDebugMessage("Could not find host connection for game " + (game.GameID ?? "unknown"));
+                return;
+            }
+
+            NotifyAllHostsDebugMessage("Game state changed: " + game.GameID);
             hubContext.Clients.Client(game.HostConnectionID).GameStateChanged(
                 Newtonsoft.Json.JsonConvert.SerializeObject(game.ToCloudGameState()));
+        }
+
+        public static void NotifyAllHostsDebugMessage(string message)
+        {
+            hubContext.Clients.All.ServerDebugMessage(message);
         }
 
         public static void NotifyHostDebugMessage(CloudGame game, string message)
