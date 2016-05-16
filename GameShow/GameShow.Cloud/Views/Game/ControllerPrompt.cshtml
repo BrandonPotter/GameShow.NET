@@ -10,8 +10,8 @@
     {
         foreach (var p in Model.PromptButtons)
          {
-             <div>
-                 <a href="javascript:promptRespond('@p.EventType', '@p.EventValue');" class="btn btn-success" style="width: 100%; background-color: @p.Color;">@p.Text</a>
+             <div style="margin-top: 10px; margin-bottom: 10px;">
+                 <a href="javascript:promptRespond('@p.EventType', '@p.EventValue');" class="btn btn-lg btn-success" style="width: 100%; background-color: @p.Color;">@p.Text</a>
              </div>
          }
     }
