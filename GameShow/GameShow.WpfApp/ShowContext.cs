@@ -74,6 +74,8 @@ namespace GameShow.WpfApp
                     Text = question,
                     PromptButtons = answerButtons.ToList()
                 };
+
+                cPrompts.Add(cPrompt);
             }
 
             Game.ControllerPrompts = cPrompts;
