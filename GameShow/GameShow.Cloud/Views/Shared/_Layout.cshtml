@@ -74,6 +74,10 @@
                 $('#gameContentFrame').html('Error loading ' + targetFrame);
             });
     };
+
+    function promptRespond(eventType, eventVal) {
+        gHub.server.controllerPromptResponse(controllerToken, eventType, eventVal);
+    };
 </script>
 </body>
 </html>

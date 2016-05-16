@@ -33,6 +33,12 @@ namespace GameShow.Cloud.Hubs
             }
         }
 
+        public void ControllerPromptResponse(string controllerToken, string eventType, string eventValue)
+        {
+            NotifyAllHostsDebugMessage($"Controller {controllerToken} response: {eventType} = {eventValue}");
+            
+        }
+
         public void HostHeartbeat(string gameId)
         {
             GameContext.Current.SetGameHostHeartbeat(gameId, Context.ConnectionId);
@@ -62,6 +68,20 @@ namespace GameShow.Cloud.Hubs
             NotifyAllHostsDebugMessage("Game state changed: " + game.GameID);
             hubContext.Clients.Client(game.HostConnectionID).GameStateChanged(
                 Newtonsoft.Json.JsonConvert.SerializeObject(game.ToCloudGameState()));
+        }
+
+        public static void NotifyHostControllerPromptResponse(CloudGame game, string controllerToken,
+            string eventType, string eventValue)
+        {
+            if (string.IsNullOrEmpty(game.HostConnectionID))
+            {
+                NotifyAllHostsDebugMessage("Could not find host connection for game " + (game.GameID ?? "unknown"));
+                return;
+            }
+
+            NotifyAllHostsDebugMessage("Game state changed: " + game.GameID);
+            hubContext.Clients.Client(game.HostConnectionID).ControllerPromptResponse(
+                game.GameID, controllerToken, eventType, eventValue);
         }
 
         public static void NotifyAllHostsDebugMessage(string message)
