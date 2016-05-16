@@ -36,7 +36,10 @@ namespace GameShow.Cloud.Hubs
         public void ControllerPromptResponse(string controllerToken, string eventType, string eventValue)
         {
             NotifyAllHostsDebugMessage($"Controller {controllerToken} response: {eventType} = {eventValue}");
-            
+            var controller = GameContext.Current.ControllerByToken(controllerToken);
+            if (controller == null) { return; }
+            if (controller.GameID == null) { return; }
+            NotifyHostControllerPromptResponse(GameContext.Current.GameByID(controller.GameID), controllerToken, eventType, eventValue);
         }
 
         public void HostHeartbeat(string gameId)

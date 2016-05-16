@@ -11,9 +11,13 @@ namespace GameShow.CloudClient
 {
     public delegate void CloudSessionUpdatedEvent(CloudSession session);
 
+    public delegate void CloudSessionControllerEvent(
+        CloudSession session, string controllerToken, string eventType, string eventValue);
+
     public class CloudSession
     {
         public event CloudSessionUpdatedEvent SessionUpdated;
+        public event CloudSessionControllerEvent ControllerEvent;
 
         private Thread _autoPushThread = null;
 
@@ -137,6 +141,11 @@ namespace GameShow.CloudClient
         public void BlinkController(CloudGameStateController controller)
         {
             PostJsonGetResponse<string>(Endpoint("/controller/blink"), controller);
+        }
+
+        public void NotifyControllerEvent(string controllerToken, string eventType, string eventValue)
+        {
+            ControllerEvent?.Invoke(this, controllerToken, eventType, eventValue);
         }
     }
 }

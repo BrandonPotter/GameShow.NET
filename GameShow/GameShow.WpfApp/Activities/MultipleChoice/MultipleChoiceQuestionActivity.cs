@@ -112,7 +112,7 @@ namespace GameShow.WpfApp.Activities.MultipleChoice
         {
             ShowContext.Current.SetQuestionPromptsAndAnswers(QuestionText,
                 _answers.Where(a => (!string.IsNullOrEmpty(a.AnswerText))).Select(a =>
-                    new PromptButton() {EventType = "MultipleChoiceAnswer", EventValue = _answers.IndexOf(a).ToString(), Text = a.AnswerText}));
+                    new PromptButton() {EventType = "Answer", EventValue = _answers.IndexOf(a).ToString(), Text = a.AnswerText}));
         }
     }
 }

@@ -36,6 +36,13 @@ namespace GameShow.CloudClient
             {
                 Logging.LogMessage("Cloud Debug", message ?? string.Empty);
             });
+
+            _proxy.On<string, string, string, string>("ControllerPromptResponse",
+                (gameId, controllerToken, eventType, eventValue) =>
+                {
+                    Logging.LogMessage("Cloud", $"Controller {controllerToken} {eventType}={eventValue}");
+                    _parentSession.NotifyControllerEvent(controllerToken, eventType, eventValue);
+                });
         }
 
         internal void SendHostHeartbeat()

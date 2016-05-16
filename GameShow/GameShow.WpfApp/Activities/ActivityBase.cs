@@ -22,7 +22,7 @@ namespace GameShow.WpfApp.Activities
             
         }
 
-        public virtual void NotifyEvent(string eventId, CloudGameStateController controller)
+        public virtual void NotifyControllerEvent(CloudGameStateController controller, string eventType, string eventValue)
         {
             
         }
